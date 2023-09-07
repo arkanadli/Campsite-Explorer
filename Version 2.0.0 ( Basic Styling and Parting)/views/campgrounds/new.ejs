@@ -1,0 +1,42 @@
+<% layout('/layouts/boilerplate') %>
+<div class="row my-5">
+    <div class="col-6 offset-3">
+        <h1 class="text-center">Create Campground</h1>
+
+        <form method="POST" action="/campgrounds">
+            <div class="mb-3">
+                <label class="form-label" for="title">Campground Title :</label>
+                <input class="form-control" type="text" name="title" id="title" placeholder="type here" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location : </label>
+                <input class="form-control" type="text" name="location" id="location" placeholder="type here" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL : </label>
+                <input class="form-control" type="text" name="image" id="image" placeholder="type here" required>
+            </div>
+
+            <label class="form-label" for="price">Price per Night : </label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" name="price" aria-label="Amount (to the nearest dollar)"
+                    value="0.00" step=".01">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description : </label>
+                <textarea class="form-control" type="text" name="description" id="description" placeholder="type here"
+                    required> </textarea>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <button class="w-100 btn btn-outline-primary">Back </button>
+                </div>
+                <div class="col-2 offset-8">
+                    <button class="w-100 btn btn-success">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
