@@ -28,15 +28,16 @@ mongoose.connect('mongodb://127.0.0.1:27017/camp-site')
     });
 
 // connect models
-const Campground = require('./models/campground')
+const Campground = require('./models/campground');
+const WrapAsync = require('../Version 3.0.0 ( Error Handling Client & Server)/utils/WrapAsync');
 
 // Routes
 
-app.get('/', async (req, res) => {
+app.get('/', WrapAsync(async (req, res) => {
     const test = new Campground({ title: 'Green Camp', price: '200' })
     await test.save();
     res.render('home')
-})
+}))
 
 // Show All
 app.get('/campgrounds', async (req, res) => {

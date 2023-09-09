@@ -31,8 +31,6 @@ const Campground = require('./models/campground')
 // Routes
 
 app.get('/', async (req, res) => {
-    const test = new Campground({ title: 'Green Camp', price: '200' })
-    await test.save();
     res.render('home')
 })
 

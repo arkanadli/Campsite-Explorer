@@ -12,7 +12,7 @@ app.use(express.json()); // to compile the request data for post method
 app.use(methodOverride('_method')); // enable patch, put, delete method
 
 // setting config for project usage
-app.engine('ejs', ejsMate)
+app.engine('ejs', ejsMate) // setting template engine
 app.set('view engine', 'ejs'); // setting engine to be viewing ejs file 
 app.set('views', path.join(__dirname, 'views')) // direct views to our views folder with absolute path
 app.use(express.static(path.join(__dirname, 'public'))) // so we can use public folder in our ejs
@@ -27,75 +27,95 @@ mongoose.connect('mongodb://127.0.0.1:27017/camp-site')
         console.log(err);
     });
 
-// connect models
+// connect Models
 const Campground = require('./models/campground')
+
+// connect Utils
+const ExpressError = require('./utils/ExpressError');
+const WrapAsync = require('./utils/WrapAsync');
+const { campgroundSchemaValidator } = require('./utils/schemas');
+
+
 
 // Routes
 
-app.get('/', async (req, res) => {
-    const test = new Campground({ title: 'Green Camp', price: '200' })
-    await test.save();
+app.get('/', WrapAsync(async (req, res) => {
     res.render('home')
-})
+}))
 
 // Show All
-app.get('/campgrounds', async (req, res) => {
+app.get('/campgrounds', WrapAsync(async (req, res) => {
     const list = await Campground.find({});
     res.render('campgrounds/index', { list })
-})
+}))
 
 // Create 
 app.get('/campgrounds/new', (req, res) => {
     res.render('campgrounds/new');
 })
 
-app.post('/campgrounds', async (req, res, next) => {
-    const upload = await Campground.insertMany(req.body)
+function campgroundValidate(req, res, next) {
+    const { error } = campgroundSchemaValidator.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(' , ')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+
+app.post('/campgrounds', campgroundValidate, WrapAsync(async (req, res, next) => {
+    const upload = await Campground.insertMany(req.body.campground)
     res.redirect('/campgrounds')
-})
+}))
 
 // Show by ID
-app.get('/campgrounds/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const camp = await Campground.findById(id);
-        res.render('campgrounds/show', { camp });
-    } catch (err) {
-        next(err)
-    }
-})
-
-// update by id
-app.get('/campgrounds/:id/edit', async (req, res) => {
+app.get('/campgrounds/:id', WrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const camp = await Campground.findById(id);
-    res.render('campgrounds/edit', { camp });
-})
+    if (!camp) { // to HANDLE that camp is empty object because nothing found
+        return next(new ExpressError('Id not found Error CODE 400 : Bad Request!', 400))
+    }
+    res.render('campgrounds/show', { camp });
+}))
 
-app.put('/campgrounds/:id', async (req, res) => {
+// update by id
+app.get('/campgrounds/:id/edit', WrapAsync(async (req, res, next) => {
     const { id } = req.params;
-    const upload = await Campground.findByIdAndUpdate(id, req.body, { runValidators: true });
+    const camp = await Campground.findById(id);
+    if (!camp) {
+        return next(new ExpressError('Id not found Error CODE 400 : Bad Request!', 400))
+    }
+    res.render('campgrounds/edit', { camp });
+}))
+
+app.put('/campgrounds/:id', campgroundValidate, WrapAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const upload = await Campground.findByIdAndUpdate(id, req.body.campground, { runValidators: true });
     res.redirect(`/campgrounds/${id}`);
-})
+}))
 
 // Delete by id
-app.delete('/campgrounds/:id', async (req, res) => {
+app.delete('/campgrounds/:id', WrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const deleted = await Campground.findByIdAndDelete(id);
     console.log('Successfully Deleted! Data :', deleted);
     res.redirect('/campgrounds');
+}))
 
+// to catch user find other something that not in the browser routes we have been set!
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404))
 })
+
 
 app.use((err, req, res, next) => {
-    console.log('ERRROOOORRR');
-    res.send('ERRRORRR MASSEEHH')
+    if (!err.message) err.message = 'Oh No Something Went Wrong';
+    if (!err.status) err.status = 500;
+    res.status(err.status).render('error', { err })
 })
 
 
-app.get('*', (req, res) => {
-    res.send('Connected')
-})
 
 
 app.listen(port, () => {
