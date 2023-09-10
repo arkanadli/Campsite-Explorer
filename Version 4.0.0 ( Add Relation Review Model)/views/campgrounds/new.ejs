@@ -1,0 +1,75 @@
+<% layout('/layouts/boilerplate') %>
+<div class="row my-5 px-3">
+    <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1">
+        <h1 class="text-center">Create Campground</h1>
+
+        <form method="POST" action="/campgrounds" novalidate class="validated-form">
+            <div class="mb-3">
+                <label class="form-label" for="title">Campground Title :</label>
+                <input class="form-control" type="text" name="campground[title]" id="title" placeholder="type here"
+                    required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div id="title" class="invalid-feedback">
+                    Please enter a title.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="location">Location : </label>
+                <input class="form-control" type="text" name="campground[location]" id="location"
+                    placeholder="type here" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div id="location" class="invalid-feedback">
+                    Please enter a location of the Campground.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL : </label>
+                <input class="form-control" type="text" name="campground[image]" id="image" placeholder="type here"
+                    required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div id="image" class="invalid-feedback">
+                    Please enter a image url.
+                </div>
+            </div>
+
+            <label class="form-label" for="price">Price per Night : </label>
+            <div class="input-group mb-3">
+                <span class="input-group-text ">$</span>
+                <input type="number" class="form-control" name="campground[price]"
+                    aria-label="Amount (to the nearest dollar)" placeholder="0.00" min="0" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div id="price" class="invalid-feedback">
+                    Please enter a price.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description : </label>
+                <textarea class="form-control" type="text" name="campground[description]" id="description"
+                    placeholder="type here" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div id="description" class=" invalid-feedback">
+                    Please enter description.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <button class="w-100 btn btn-outline-primary">Back </button>
+                </div>
+                <div class="col-2 offset-8">
+                    <button class="w-100 btn btn-success">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -35,6 +35,16 @@ const ExpressError = require('./utils/ExpressError');
 const WrapAsync = require('./utils/WrapAsync');
 const { campgroundSchemaValidator } = require('./utils/schemas');
 
+//Middle Ware
+function campgroundValidate(req, res, next) {
+    const { error } = campgroundSchemaValidator.validate(req.body) // Joi function to validate relatively to schema we already set before
+    if (error) {
+        const msg = error.details.map(el => el.message).join(' , ') // collection the array error message into 1 message string
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
 
 
 // Routes
@@ -53,16 +63,6 @@ app.get('/campgrounds', WrapAsync(async (req, res) => {
 app.get('/campgrounds/new', (req, res) => {
     res.render('campgrounds/new');
 })
-
-function campgroundValidate(req, res, next) {
-    const { error } = campgroundSchemaValidator.validate(req.body)
-    if (error) {
-        const msg = error.details.map(el => el.message).join(' , ')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
 
 app.post('/campgrounds', campgroundValidate, WrapAsync(async (req, res, next) => {
     const upload = await Campground.insertMany(req.body.campground)
