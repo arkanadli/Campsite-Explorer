@@ -1,0 +1,88 @@
+<% layout('/layouts/boilerplate') %>
+
+<main class="row mb-5">
+    <div class="col-lg-6 col-10 mx-auto ">
+        <article class="card">
+            <img src="<%= camp.image %>" class="card-img-top img" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><%= camp.title %></h5>
+                <p class="card-text"><%= camp.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <h6>Location : <%= camp.location %></h6>
+                </li>
+                <li class="list-group-item">$ <%= camp.price %> / night </li>
+                <li class="list-group-item">
+                    <h6>Author : <%= camp.author.username %></h6>
+                </li>
+            </ul>
+
+            <div class="card-body">
+                <div class="row g-1">
+                    <div class="col-2">
+                        <a href="/campgrounds" class="btn btn-outline-primary card-link w-100">Back</a>
+                    </div>
+                    <!-- we use equals because id in mongoose is objectId so if we want compare ObjectId use equals!  -->
+                    <% if ( currentUser && camp.author.equals(currentUser._id) ){ %>
+                    <div class="col-2">
+                        <a href="/campgrounds/<%= camp._id %>/edit" class="btn btn-primary card-link w-100">Edit</a>
+                    </div>
+                    <div class="col-2 offset-6">
+                        <form method="POST" action="/campgrounds/<%=camp._id%>?_method=DELETE">
+                            <button class="btn btn-danger card-link">Delete</button>
+                        </form>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </article>
+
+    </div>
+    <aside class="col-lg-6 col-10">
+        <!-- Check if user already login or not -->
+        <% if(currentUser){ %>
+        <article class="card mb-3 p-3">
+            <h2>Leave a Review</h2>
+            <form novalidate class="validated-form" method="POST" action="/campgrounds/<%= camp._id %>/reviews">
+                <div class="mb-3">
+                    <label class="form-label" for="rating">Rating</label>
+                    <input class="form-range" type="range" max="5" min="1" name="review[rating]" id="rating" required>
+                    <div class="is-valid">
+                        <div class="valid-feedback">
+                            Filled!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="review">Review</label>
+                    <textarea class="form-control" name="review[body]" id="review" cols="30" rows="4"
+                        placeholder="type review.." required></textarea>
+                    <div class="is-valid">
+                        <div class="valid-feedback">
+                            Filled!
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success">Submit</button>
+            </form>
+        </article>
+        <% } %>
+        <article class="my-4">
+            <h3>Campground Review</h3>
+            <% for(review of camp.reviews){ %>
+            <div class="card my-2">
+                <div class="card-body">
+                    <h5 class="mb-1">Rating : <%= review.rating %></h5>
+                    <p class="card-text text-muted"><%= review.author.username %></p>
+                    <p class="card-text">Review : <%= review.body %></p>
+                    <% if(currentUser && review.author.equals(currentUser._id)) {%>
+                    <form method="POST" action="/campgrounds/<%= camp._id  %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-danger">Delete</button></form>
+                    <% } %>
+                </div>
+            </div>
+            <% } %>
+        </article>
+    </aside>
+</main>
