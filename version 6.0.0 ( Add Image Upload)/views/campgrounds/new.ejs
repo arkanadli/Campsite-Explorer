@@ -15,6 +15,7 @@
                     Please enter a title.
                 </div>
             </div>
+
             <div class="mb-3">
                 <label class="form-label" for="location">Location : </label>
                 <input class="form-control" type="text" name="campground[location]" id="location"
@@ -24,17 +25,6 @@
                 </div>
                 <div id="location" class="invalid-feedback">
                     Please enter a location of the Campground.
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="image">Image URL : </label>
-                <input class="form-control" type="file" multiple name="campground[image]" id="image"
-                    placeholder="type here" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-                <div id="image" class="invalid-feedback">
-                    Please enter a image url.
                 </div>
             </div>
 
@@ -52,6 +42,18 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label" for="image">Upload Image </label>
+                <input class="form-control" type="file" multiple name="campground[image]" id="image"
+                    placeholder="type here" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div id="image" class="invalid-feedback">
+                    Please enter a image url.
+                </div>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label" for="description">Description : </label>
                 <textarea class="form-control" type="text" name="campground[description]" id="description"
                     placeholder="type here" required></textarea>
@@ -62,6 +64,8 @@
                     Please enter description.
                 </div>
             </div>
+
+
             <div class="row">
                 <div class="col-2">
 

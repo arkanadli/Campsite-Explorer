@@ -1,8 +1,5 @@
 
-# Adding Model User
-# Adding Auth Login and Register
-# Adding Must Auth to Access Some Features
-# Store Current Login User in Site Session
+# Adding Controllers to exclude the complexity in folder routes
 # Adding Star Rating using Starability CSS library
 # Dependencies Uses :
 { 

@@ -17,11 +17,11 @@ router.get('/', WrapAsync(campgroundControllers.index))
 router.get('/new', isLoggedIn, campgroundControllers.renderFormCreate)
 
 
-// router.post('/', isLoggedIn, campgroundValidate, WrapAsync(campgroundControllers.create))
-router.post('/', upload.array('campground[image]'), (req, res) => {
-    console.log(req.body, req.files) // req.body will be all besides the files, and req.files are only show uploaded file in form
-    res.send('it works')
-})
+router.post('/', isLoggedIn, upload.array('campground[image]'), campgroundValidate, WrapAsync(campgroundControllers.create))
+// router.post('/', upload.array('campground[image]'), (req, res) => {
+//     console.log(req.body, req.files) // req.body will be all besides the files, and req.files are only show uploaded file in form
+//   res.send('it works')
+// })
 
 // Show by ID
 router.get('/:id', WrapAsync(campgroundControllers.showCampground))
@@ -29,7 +29,7 @@ router.get('/:id', WrapAsync(campgroundControllers.showCampground))
 // update by id
 router.get('/:id/edit', isLoggedIn, isAuthorCamp, WrapAsync(campgroundControllers.renderFormEdit))
 
-router.put('/:id', isLoggedIn, isAuthorCamp, campgroundValidate, WrapAsync(campgroundControllers.editCampground))
+router.put('/:id', isLoggedIn, isAuthorCamp, upload.array('campground[image]'), campgroundValidate, WrapAsync(campgroundControllers.editCampground))
 
 // Delete by id
 router.delete('/:id', isLoggedIn, isAuthorCamp, WrapAsync())

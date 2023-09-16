@@ -29,7 +29,15 @@ const insertDB = async function () {
         const camp = new Campground({
             title: `${sample(type)} ${sample(places)}`,
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
-            image: `https://source.unsplash.com/collection/429524/`,
+            images: [
+                {
+                    url: "https://res.cloudinary.com/dypcebyz9/image/upload/v1694838527/Campsite%20Explorer/zufsjg5bcvbcnness0ft.jpg",
+                    filename: "Campsite Explorer/zufsjg5bcvbcnness0ft"
+                },
+                {
+                    url: "https://res.cloudinary.com/dypcebyz9/image/upload/v1694838595/Campsite%20Explorer/wunvu1zakecgtxnpmzyo.jpg",
+                    filename: "Campsite Explorer/wunvu1zakecgtxnpmzyo"
+                }],
             description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.Quidem, impedit magnam necessitatibus numquam reprehenderit officia commodi esse vitae quasi amet provident ipsa quis ex quia ratione quo suscipit deserunt, adipisci minima, voluptatibus itaque? Labore optio iusto architecto unde eius non nobis.Ipsam, laudantium ducimus nam tenetur earum autem nobis aliquid!',
             price: priceRandom,
             author: '6502c58f1915ffd9dd24d0e3'

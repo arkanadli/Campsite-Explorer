@@ -1,9 +1,8 @@
 
-# Adding Model User
-# Adding Auth Login and Register
-# Adding Must Auth to Access Some Features
-# Store Current Login User in Site Session
-# Adding Star Rating using Starability CSS library
+# Adding Multer to enable parsing multipart encoding type data
+# Adding Couldinary to store Data like images
+# Adding Image file upload feature for user
+# Adding Env file Variable to store secret value variable ( for Development Process only) 
 # Dependencies Uses :
 { 
     "connect-flash": "^0.1.1", // Enable Session and Flash
@@ -17,4 +16,8 @@
     "passport": "^0.6.0", // Enabling auth by local, google, etc.
     "passport-local": "^1.0.0", // Use Local Strategy to check auth
     "passport-local-mongoose": "^8.0.0" // Use Local Strategy Integrated with mongoose
+    "multer": "^1.4.5-lts.1", // Enable Reading multipart Encoding type so that we can store file
+    "cloudinary": "^1.40.0", // Enable app to store big data like images
+    "multer-storage-cloudinary": "^4.0.0", // Integrated cloudinary to multer
+    
 }

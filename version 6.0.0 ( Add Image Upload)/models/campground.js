@@ -1,6 +1,19 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Review = require('./review')
+const Review = require('./review');
+const { type } = require('../seeds/nameGenerator');
+
+const imageSchema = new Schema({
+    url: String,
+    filename: String
+})
+
+// normal url we store in DB : https://res.cloudinary.com/demo/image/upload/docs/models.jpg
+// url to request some modification https://res.cloudinary.com/demo/image/upload/ar_1.0,c_fill,w_250/docs/models.jpg
+
+imageSchema.virtual('thumbnail').get(function () {
+    return this.url.replace('/upload', '/upload/w_200,h_150')
+})
 
 const campgroundSchema = new Schema({
     title: {
@@ -19,10 +32,7 @@ const campgroundSchema = new Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        required: true
-    },
+    images: [imageSchema],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
