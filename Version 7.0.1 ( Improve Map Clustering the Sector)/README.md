@@ -1,7 +1,8 @@
 
 # Adding Clustering Maps Widgets in Campgrounds Page
-# Adding Zooming Cluster Feature
+# Adding Zooming Cluster Feature.
 # Adding Different Type of Cluster Base on How Many Campgrounds in it.
+# Adding Popup Mark Information that Related to Pointed Campground.
 
 # Dependencies Uses :
 { 
