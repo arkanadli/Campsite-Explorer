@@ -19,3 +19,28 @@ body {
     height: 400px;
     object-fit: cover;
 }
+
+#navbar {
+    background-color: black;
+}
+
+#logoText {
+    letter-spacing: 2px;
+}
+
+.blur {
+    backdrop-filter: blur(10px);
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.card {
+    background-color: rgb(10, 8, 8);
+    color: rgb(81, 218, 127);
+    box-shadow: 0px 0px 18px -5px rgba(18, 165, 4, 0.56);
+    -webkit-box-shadow: 0px 0px 18px -5px rgba(18, 165, 4, 0.56);
+    -moz-box-shadow: 0px 0px 18px -5px rgba(18, 165, 4, 0.56);
+}
