@@ -42,7 +42,7 @@ const insertDB = async function () {
                     url: "https://res.cloudinary.com/dypcebyz9/image/upload/v1694838595/Campsite%20Explorer/wunvu1zakecgtxnpmzyo.jpg",
                     filename: "Campsite Explorer/wunvu1zakecgtxnpmzyo"
                 }],
-            description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.Quidem, impedit magnam necessitatibus numquam reprehenderit officia commodi esse vitae quasi amet provident ipsa quis ex quia ratione quo suscipit deserunt, adipisci minima, voluptatibus itaque? Labore optio iusto architecto unde eius non nobis.Ipsam, laudantium ducimus nam tenetur earum autem nobis aliquid!',
+            description: "Escape to our campground site, where the world's most breathtaking views become your backyard. Imagine waking up to a sunrise that paints the sky with hues you've only seen in dreams, or gazing at a starlit panorama that feels like a portal to another world. Your next adventure begins here, where nature's grandeur takes center stage. Welcome to a campsite with an awe-inspiring view that will redefine your sense of wonder.",
             price: priceRandom,
             author: '6502c58f1915ffd9dd24d0e3',
             geometry:{type: "Point", coordinates: [longtitudeRandom,latitudeRandom]}

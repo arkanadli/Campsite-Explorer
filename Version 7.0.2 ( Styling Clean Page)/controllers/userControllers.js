@@ -13,7 +13,7 @@ module.exports.createUser = async (req, res, next) => {
         req.login(newUser, (err) => { // so that after registering, site state it as already login too
             // need to callback a function 
             if (err) return next(err);
-            req.flash('success', 'Welcome to Campground')
+            req.flash('success', 'Success login!')
             res.redirect('/campgrounds')
         })
         // req.flash.user_id = newUser._id;

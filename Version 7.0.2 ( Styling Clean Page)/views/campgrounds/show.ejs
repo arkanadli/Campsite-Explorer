@@ -29,14 +29,14 @@
             <div class="card-body">
                 <h5 class="card-title"><%= camp.title %></h5>
                 <p class="card-text"><%= camp.description %></p>
-             
+
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+            <ul  class="list-group list-group-flush">
+                <li class="list-group-item more-info">
                     <h6>Location : <%= camp.location %></h6>
                 </li>
-                <li class="list-group-item">$ <%= camp.price %> / night </li>
-                <li class="list-group-item">
+                <li class="list-group-item more-info">$ <%= camp.price %> / night </li>
+                <li class="list-group-item more-info">
                     <h6>Author : <%= camp.author.username %></h6>
                 </li>
             </ul>
@@ -61,10 +61,19 @@
             </div>
         </article>
 
+        <article class="my-4">
+            <div class="card my-2 p-3">
+                <h3>Map Navigation</h3>
+                <div class="card-body px-0">
+                    <div id='map' style='width: 100%; height: 300px;'></div>
+                </div>
+            </div>
+        </article>
+
     </div>
-    <aside class="col-lg-6 col-10">
+    <aside class="col-lg-6 col-10 mx-auto mb-4">
         <!-- Check if user already login or not -->
-        <% if(currentUser){ %>
+        
         <article class="card mb-3 p-3">
             <h2>Leave a Review</h2>
             <form novalidate class="validated-form" method="POST" action="/campgrounds/<%= camp._id %>/reviews">
@@ -103,43 +112,37 @@
                 <button class="btn btn-success">Submit</button>
             </form>
         </article>
-        <% } %>
-        <article class="my-4">
-            <h3>Campground Review</h3>
-            <% for(review of camp.reviews){ %>
-            <div class="card my-2">
-                <div class="card-body">
 
-                    <h4 class="card-text text-muted"><%= review.author.username %></h4>
-                    <p class="starability-result" data-rating="<%= review.rating %>">
-                        Rated: <%= review.rating %> stars
-                    </p>
-
-                    <p class="card-text">Review : <%= review.body %></p>
-                    <% if(currentUser && review.author.equals(currentUser._id)) {%>
-                    <form method="POST" action="/campgrounds/<%= camp._id  %>/reviews/<%= review._id %>?_method=DELETE">
-                        <button class="btn btn-danger">Delete</button></form>
-                    <% } %>
-                </div>
+        <article >
+            <div class="card mb-2 p-3">
+                <h3>Campground Review</h3>
+                <% if(camp.reviews.length){ %>
+                    <% for(review of camp.reviews){ %>
+                        <div id="review-card" class="card-body">
+                            <h4 class="card-text text-white-50">Reviewer : <%= review.author.username %></h4>
+                            <p class="starability-result" data-rating="<%= review.rating %>">
+                                Rated: <%= review.rating %> stars
+                            </p>
+        
+                            <p class="card-text"><%= review.body %></p>
+                            <% if(currentUser && review.author.equals(currentUser._id)) {%>
+                            <form method="POST" action="/campgrounds/<%= camp._id  %>/reviews/<%= review._id %>?_method=DELETE">
+                                <button class="btn btn-danger">Delete</button></form>
+                            <% } %>
+                        </div>
+                        <% } %>
+                <% }else { %>
+                    <p>No reviews yet</p>
+                <% } %>
+                
             </div>
-            <% } %>
         </article>
-        <article class="my-4">
-            <h3>Map for Our campgrounds</h3>
-            <div class="card my-2">
-                <div class="card-body">
-
-                    <div id='map' style='width: 400px; height: 300px;'></div>
-
-                </div>
-            </div>
-            
-        </article>
+        
     </aside>
 </main>
 
 <script>
-    const mapBoxToken = '<%- process.env.MAPBOX_API %>';
-    const campground = <%- JSON.stringify(camp) %> 
+    const mapBoxToken = '<%- process.env.MAPBOX_API %>'
+    const campground = <%- JSON.stringify(camp) %>
 </script>
 <script src="/js/showPageMaps.js"></script>

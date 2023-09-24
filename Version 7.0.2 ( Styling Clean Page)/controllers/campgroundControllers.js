@@ -95,3 +95,8 @@ module.exports.deleteCampground = async (req, res, next) => {
     req.flash('success', `Successfully Deleted!`);
     res.redirect('/campgrounds');
 }
+
+module.exports.returnTo = function (req,res,next){
+    const {id} = req.params
+    res.redirect(`/campgrounds/${id}`)
+}

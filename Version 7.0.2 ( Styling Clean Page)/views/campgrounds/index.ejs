@@ -1,6 +1,6 @@
 <% layout('/layouts/boilerplate') %>
 
-<div id="map" style="width: 100%; height: 500px;"></div>
+<div id="map" style="width: 100%; height: 500px; color: black;"></div>
 
 <div class="container">
 
@@ -8,9 +8,9 @@
 
 </div>
 <% for (let camp of list) { %>
-<div class="card m-2">
+<div class="card m-2 my-5">
     <div class="row ">
-        <div class="col-4 ">
+        <div class="col-xl-8 ">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <% camp.images.forEach((img,i) => { %>
@@ -22,13 +22,16 @@
             </div>
 
         </div>
-        <div class="col-8 ">
+        <div class="col-xl-4 ">
             <div class="card-body">
                 <h4> <%= camp.title %> </h4>
-                
-                <p><%= camp.description %></p>
-                <p class="text-black-50"><%= camp.location %></p>
-                <a class="btn btn-primary" href="/campgrounds/<%= camp._id %>">View <%= camp.title %></a>
+                <div class="description">
+                    <p><%= camp.description %></p>
+                </div>
+                <p class="text-white-50"><%= camp.location %></p>
+                <div class="button-container mt-auto">
+                    <a class="btn btn-primary button-cs" href="/campgrounds/<%= camp._id %>">View</a>
+                </div>
                 
             </div>
         </div>

@@ -34,4 +34,7 @@ router.put('/:id', isLoggedIn, isAuthorCamp, upload.array('campground[image]'), 
 // Delete by id
 router.delete('/:id', isLoggedIn, isAuthorCamp, WrapAsync())
 
+// Redirect returnTo review submition
+router.get('/:id/reviews', campgroundControllers.returnTo)
+
 module.exports = router;

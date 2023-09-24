@@ -1,27 +1,33 @@
 <% layout('/layouts/boilerplate') %>
-<h1>Login</h1>
-<form action="/users/login" method="POST" class="validated-form" novalidate>
-    <div class=" mb-3">
-        <label class="form-label" for="username">Username : </label>
-        <input class="form-control" type="text" name="username" id="username" required>
-        <div class="valid-feedback">
-            Looks good!
+<div class="card my-2">
+
+</div>
+<div id="login" class="mx-auto mt-5">
+    <h2 class="text-center">LOGIN</h2>
+    <form action="/users/login" method="POST" class="validated-form py-2" novalidate>
+        <div class=" mb-4">
+            <label class="form-label" for="username">Username : </label>
+            <input class="form-control" type="text" name="username" id="username" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
         </div>
-    </div>
-    <div class=" mb-3">
-        <label class="form-label" for="password">Password : </label>
-        <input class="form-control" type="password" name="password" id="password" required>
-        <div class="valid-feedback">
-            Looks good!
+        <div class=" mb-5">
+            <label class="form-label" for="password">Password : </label>
+            <input class="form-control" type="password" name="password" id="password" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <% if (returnTo.length) { %>
+            <input type="hidden" name="returnTo" value="<%=returnTo[0]%>">
+            <!-- sending req.body.returnTo = returnTo -->
+            <% } %>
         </div>
-        <% if (returnTo.length) { %>
-        <input type="hidden" name="returnTo" value="<%=returnTo[0]%>">
-        <!-- sending req.body.returnTo = returnTo -->
-        <% } %>
-    </div>
 
 
-    <div class="mb-3">
-        <button class="btn btn-success">Sign Up</button>
-    </div>
-</form>
+        <div class="mb-3">
+            <button class="btn btn-success me-2">Log in</button>
+            <a class="link_login "  href="/users/register"> Create new account</a>
+        </div>
+    </form>
+</div>
