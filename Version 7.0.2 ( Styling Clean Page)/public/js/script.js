@@ -28,23 +28,27 @@ window.addEventListener('scroll', function () {
 });
 
 // make scroll to top dissapear
-function scrollFunction() {
-    if (
-        document.body.scrollTop > 200 ||
-        document.documentElement.scrollTop > 200
-        ) {
-            mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
+try {
+    let mybutton = document.getElementById("btn-back-to-top");
+    mybutton.addEventListener("click", backToTop);
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 200 ||
+            document.documentElement.scrollTop > 200
+            ) {
+                mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
     }
-}
-function backToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+} catch (error) {
+    
 }
 
-let mybutton = document.getElementById("btn-back-to-top");
-mybutton.addEventListener("click", backToTop);
 
 
 
