@@ -1,0 +1,33 @@
+<% layout('/layouts/boilerplate') %>
+<div id="register"  class="mx-auto mt-5">
+    <div>
+        <h1 class="text-center">REGISTER</h1>
+        <form action="/users/register" method="POST" class="validated-form py-2" novalidate>
+            <div class=" mb-4">
+                <label class="form-label" for="username">Username : </label>
+                <input class="form-control" type="text" name="username" id="username" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class=" mb-4">
+                <label class="form-label" for="email">Email : </label>
+                <input class="form-control" type="email" name="email" id="email" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class=" mb-5">
+                <label class="form-label" for="password">Password : </label>
+                <input class="form-control" type="password" name="password" id="password" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-4">
+                <button class="btn btn-success me-2">Sign Up</button>
+                <a class="link_login "  href="/users/login"> Already have an account?</a>
+            </div>
+        </form>
+    </div>
+</div>

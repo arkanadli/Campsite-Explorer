@@ -1,0 +1,57 @@
+<% layout('/layouts/boilerplate') %>
+
+
+<div id="map" ></div>
+<div class="container mt-5 text-center">
+    
+    <h1>Discover Great Campsite! </h1>
+    
+</div>
+
+<div class="container-fluid">
+
+    <% for (let camp of list) { %>
+        <div class="card m-2 my-5 mx-auto mx-4">
+    <div class="row  ">
+        <div class="col-xl-8 ">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <% camp.images.forEach((img,i) => { %>
+                        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <img class="img object-fit-cover" src="<%= img.url %>" alt="">
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-4 ">
+            <div class="card-body">
+                <h4> <%= camp.title %> </h4>
+                <div class="description">
+                    <p><%= camp.description %></p>
+                </div>
+                <p class="text-white-50"><%= camp.location %></p>
+                <div class="button-container mt-auto">
+                    <a class="btn btn-primary button-cs" href="/campgrounds/<%= camp._id %>">View</a>
+                </div>
+        
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+</div>
+<!-- button up to top -->
+<button type="button"class="btn btn-danger btn-floating btn-lg"id="btn-back-to-top" title="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+      </svg>
+</button>
+
+<script>
+    const mapBoxToken = '<%- process.env.MAPBOX_API %>'; // Storing up the token rendered from env var
+    // must send it with features formated, because need to be same as the data in Mapbox template
+    const campgrounds = {features: <%- JSON.stringify(list) %>}; // Storing up all Campgrounds to send it to next script
+</script>
+<script src="/js/clusterMaps.js"></script>
