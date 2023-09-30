@@ -96,7 +96,7 @@ app.use(
 );
 
 
-
+ 
 // setting session and flash config
 const configSession = {
     name:'_map', // it will trick the penetrator, that our cookiesid name was change into _map
