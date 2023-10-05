@@ -134,6 +134,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 // connect database
+
 mongoose.connect('mongodb://127.0.0.1:27017/camp-site')
     .then((data) => {
         console.log("Connected into Databases");
