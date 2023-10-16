@@ -99,12 +99,12 @@ app.use(
 
 // setting session and flash config
 const configSession = {
-    name:'_map', // it will trick the penetrator, that our cookiesid name was change into _map
+    name: '_map', // it will trick the penetrator, that our cookiesid name was change into _map
     secret: 'shoulbeinenvVariable', // secret code that it should be valued by the env variable 
     resave: false, // frmlty
     saveUninitialized: true, // frmlty
     cookie: { // setting up cookie, cookie will store the season id, so the data in session will expire for a week
-        httpOnly:true, // make the cookies only in http req, cannot be show up in script
+        httpOnly: true, // make the cookies only in http req, cannot be show up in script
         // secure:true, // make sure that the http later when we deploy is secure connection only
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
