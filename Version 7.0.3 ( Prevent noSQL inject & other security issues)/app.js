@@ -23,7 +23,7 @@ const reviewsRouter = require('./routes/reviews')
 const usersRouter = require('./routes/users') // ver 5.0.0
 const User = require('./models/user') // ver 5.0.0
 
-//   setting config readable usage
+// setting config readable usage
 app.use(express.urlencoded({
     extended: true
 })); // to parse the req body for post method
