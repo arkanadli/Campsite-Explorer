@@ -40,7 +40,7 @@ app.set('view engine', 'ejs'); // setting engine to be viewing ejs file
 app.set('views', path.join(__dirname, 'views')) // direct views to our views folder with absolute path
 app.use(express.static(path.join(__dirname, 'public'))) // so we can use public folder in our ejs
 
-// conn ect database
+// connect database
 // const dbURL = process.env.DB_URL // a cloud databases, use it when it in production
 const dbURL = 'mongodb://127.0.0.1:27017/camp-site' // local databases for development process
 mongoose.connect(dbURL)
