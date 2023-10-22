@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'Campsite Explorer',
+        folder: 'Campsite   Explorer',
         allowedFormat: ['jpeg', 'png', 'jpg']
     }
 });
